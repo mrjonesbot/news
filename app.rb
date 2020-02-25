@@ -7,7 +7,7 @@ require 'news-api'
 def view(template); erb template.to_sym; end
 before { puts "Parameters: #{params}" }                                     
 
-# enter your Dark Sky API key here
+# enter your Dark Sky API key
 ForecastIO.api_key = "f2b18bf011014e29a217c99dae3841a4"
 
 # enter your News API key here
