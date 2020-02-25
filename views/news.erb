@@ -31,18 +31,21 @@
   <div class="container">
   <div class="row mt-4">
     <div class="col-sm-4 text-center">
-      <h5>Weather Report</h5>
+      <h4>Weather Report</h4>
+      <h6>Todays Weather</h6>
       <p> <%=@current%> </p>
-      <p> <%=@day1%> </p>
-      <p> <%=@day2%> </p>
-      <p> <%=@day3%> </p>
-      <p> <%=@day4%> </p>
-      <p> <%=@day5%> </p>
+      <h6>8 Day Forecast</h6>
+      <p>
+            <% for day in @daily_forecast %>
+              A high of <%= day["temperatureHigh"] %> and <%= day["summary"] %>
+            <% end %> </p>
     </div>
     <div class="col-sm-4 text-center">
       <h5>News Report</h5>
-      <p>@sources</p>
-      <p></p>
+      <p>
+      <% for article in @article %>
+   <%= article["title"] %>
+    <% end %></p>
     </div>
   </div>
 </body>

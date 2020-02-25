@@ -35,18 +35,12 @@ get "/news" do
     @current = "It is currently #{current_temperature} degrees and #{conditions}"
     location = @forecast["location"]
 
-    @day1="1 day out, it will be #{@forecast["daily"]["data"][0]["temperatureHigh"]} with #{@forecast["daily"]["data"][0]["summary"]}"
-    @day2="2 days out, it will be #{@forecast["daily"]["data"][1]["temperatureHigh"]} with #{@forecast["daily"]["data"][1]["summary"]}"
-    @day3="3 days out, it will be #{@forecast["daily"]["data"][2]["temperatureHigh"]} with #{@forecast["daily"]["data"][2]["summary"]}"
-    @day4="4 days out, it will be #{@forecast["daily"]["data"][3]["temperatureHigh"]} with #{@forecast["daily"]["data"][3]["summary"]}"
-    @day5="5 days out, it will be #{@forecast["daily"]["data"][4]["temperatureHigh"]} with #{@forecast["daily"]["data"][4]["summary"]}"
+    @daily_forecast = @forecast["daily"]["data"]
 
-   # @future =  for day in @forecast["daily"]["data"]
-#puts "A high temperature of #{day["temperatureHigh"]} and #{day["summary"]}."
-    #end
 
-    news = newsapi.get_top_headlines(sources: "bbc-news")
-    sources = newsapi.get_sources(country: 'us', language: 'en')
+    url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=7f7a3338481f4a0ea8d7b067e2b0ed0d"
+    @news = HTTParty.get(url).parsed_response.to_hash
+    @article = @news["articles"]
 
   view "news"
 end
